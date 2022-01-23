@@ -1,7 +1,7 @@
 package Testing.Plattformer;
 
 import Main.Msc.Vector2;
-import Main.Objects.Collision.ScareCollider;
+import Main.Objects.Components.Collision.ScareCollider;
 import Main.Objects.Object;
 
 public class Bullet extends Object {

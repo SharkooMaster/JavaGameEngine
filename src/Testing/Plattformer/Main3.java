@@ -19,7 +19,7 @@ public class Main3  {
         Main.isPlaying=true;
         Main.background= new Color(44, 157, 228);
 
-        ObjectHandler.addObject(new Player(new Vector2(200,200)));
+        ObjectHandler.addObject(new Item(true));
         //ObjectHandler.addObject(new Enemy(new Vector2(300,500)));
         ObjectHandler.addObject(new Ground(new Vector2(300,600), new Vector2(1000,100)));
         ObjectHandler.addObject(new Ground(new Vector2(300,500),new Vector2(100,100)));

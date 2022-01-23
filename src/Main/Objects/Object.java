@@ -6,20 +6,26 @@ import java.util.ArrayList;
 
 import Main.Display.Map;
 import Main.Msc.*;
-import Main.Objects.Collision.Collider;
+import Main.Objects.Components.Collision.Collider;
+import Main.Objects.Components.Collision.ScareCollider;
+import Main.Objects.Components.Physics.PhysicsBody;
 
 public class Object {
 
     private Sprite sprite;
-    private Vector2 position=new Vector2(0,0);
-    private Vector2 scale=new Vector2(0,0);
+    private Vector2 position=new Vector2(200,200);
+    private Vector2 scale=new Vector2(100,100);
     private Vector2 direction = new Vector2(1,0);
+
+    private boolean isColliding = false;
 
     private String tag="untagged";
 
     private float angle=180;
 
     ArrayList<Collider> colliders = new ArrayList<>();
+    PhysicsBody physicsBody;
+
 
     private Animation animation;
 
@@ -39,6 +45,19 @@ public class Object {
         sprite.loadSprite(new Vector2(0,0));
 
     }
+    public Object() {
+        sprite = new Sprite();
+        setScale(new Vector2(100,100));
+
+    }
+
+    public boolean isColliding() {
+        return isColliding;
+    }
+
+    public void setColliding(boolean colliding) {
+        isColliding = colliding;
+    }
 
     public void addCollider(Collider collider)
     {
@@ -48,6 +67,16 @@ public class Object {
     public void removeCollider(Collider collider)
     {
         colliders.remove(collider);
+    }
+
+    public void setPhysicsbody(PhysicsBody physicsBody)
+    {
+        this.physicsBody = (physicsBody);
+    }
+
+    public PhysicsBody getPhysicsbody()
+    {
+        return physicsBody;
     }
 
     public ArrayList<Collider> getColliders() {
@@ -116,7 +145,36 @@ public class Object {
     }
 
     public void setPosition(Vector2 position) {
-        this.position = position;
+        if(physicsBody==null) {
+            this.position = position;
+        }
+        else
+        {
+            if(true)
+            {
+
+                for(Collider c : getColliders()) {
+
+                    ScareCollider collider = (ScareCollider) c.copy();
+                    collider.setPosition(position.add(getPhysicsbody().getVelocity()));
+                    //System.out.println("is   "+c.getPosition());
+                    //System.out.println("next "+collider.getPosition());
+
+                            //System.out.println(ScareCollider.isCollision(collider,obj.getColliders()));
+                    if(ScareCollider.isCollision(collider,ObjectHandler.getObjects()))
+                    {
+                        getPhysicsbody().setVelocity(new Vector2(0,0));
+
+                    }
+                    else
+                    {
+                        this.position = position;
+
+                        //this.position = position.add(position.getNegative());
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -140,6 +198,9 @@ public class Object {
         {
             collider.Update();
         }
+        if(physicsBody!=null)
+            getPhysicsbody().Update();
+
     }
 
     public Sprite getSprite() {
@@ -151,10 +212,23 @@ public class Object {
         setPosition(getPosition());
     }
 
+    public void onCollisionExit(Object collision)
+    {
+        setColliding(false);
+    }
+
+
+    public void onCollisionEnter(Object parent) {
+        setColliding(true);
+
+    }
+
     public void onTrigger(Object collision)
     {
 
     }
+
+
 
     public void keyPressed(KeyEvent e) {
     }
@@ -165,8 +239,7 @@ public class Object {
     public void keyDown(KeyEvent e) {
     }
 
-    public Object() {
-    }
+
 
     public BufferedImage Display()
     {
@@ -174,10 +247,11 @@ public class Object {
         {
             return animation.getAnimation();
         }
-        else
+        else if (sprite.getSpriteImage()!=null)
         {
             return sprite.getSpriteImage();
         }
+        else return null;
     }
 
     public void Destroy()

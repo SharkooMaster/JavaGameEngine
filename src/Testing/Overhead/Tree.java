@@ -3,7 +3,7 @@ package Testing.Overhead;
 
 import Main.Msc.Vector2;
 import Main.Objects.Animation;
-import Main.Objects.Collision.ScareCollider;
+import Main.Objects.Components.Collision.ScareCollider;
 import Main.Objects.Object;
 
 public class Tree extends Object {

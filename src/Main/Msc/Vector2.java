@@ -51,6 +51,9 @@ public class Vector2 {
     public Vector2 add(Vector2 vector2) {
         return new Vector2(x+ vector2.x,y+ vector2.y);
     }
+    public Vector2 add(float a) {
+        return new Vector2(x+ a,y+ a);
+    }
     public Vector2 subtract(Vector2 vector2) {
         return new Vector2(x- vector2.x,y- vector2.y);
     }

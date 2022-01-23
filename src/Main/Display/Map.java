@@ -3,9 +3,9 @@ package Main.Display;
 import Main.Main;
 import Main.Msc.Input.Input;
 import Main.Msc.ObjectHandler;
-import Main.Objects.Collision.CircleCollider;
-import Main.Objects.Collision.Collider;
-import Main.Objects.Collision.ScareCollider;
+import Main.Objects.Components.Collision.CircleCollider;
+import Main.Objects.Components.Collision.Collider;
+import Main.Objects.Components.Collision.ScareCollider;
 import Main.Objects.Object;
 
 import javax.swing.*;
@@ -130,14 +130,13 @@ public class Map extends JPanel {
             }
         }
     }
-
     public void Update()
     {
-        UpdateSwingComponents();
-        long start = System.nanoTime();
 
         UpdateObjects();
         checkCollisions();
+        UpdateSwingComponents();
+        long start = System.nanoTime();
 
         long end = System.nanoTime();
 
@@ -203,7 +202,8 @@ public class Map extends JPanel {
                 g.drawOval((int) ob12.x, (int) ob12.y,5,5);
                 g.drawOval((int) ob13.x, (int) ob13.y,5,5);
                 g.drawOval((int) ob14.x, (int) ob14.y,5,5);
-*/
+*/                g.setColor(Color.GREEN);
+
                 if(c instanceof CircleCollider&&c.isVisible())
                 {
                     g.drawOval((int) (c.getPosition().getX()-(c.getScale().getX()/2)), (int) (c.getPosition().getY()-(c.getScale().getY()/2)), (int) c.getScale().getX(), (int) c.getScale().getY());
@@ -212,6 +212,7 @@ public class Map extends JPanel {
                 {
                     g.drawRect((int) (c.getPosition().getX()-(c.getScale().getX()/2)), (int) (c.getPosition().getY()-(c.getScale().getY()/2)), (int) c.getScale().getX(), (int) c.getScale().getY());
                 }
+                g.setColor(Color.black);
             }
         }
     }

@@ -1,8 +1,6 @@
-package Main.Objects.Collision;
+package Main.Objects.Components.Collision;
 
-import Main.Msc.ObjectHandler;
 import Main.Msc.Vector2;
-import Main.Objects.Object;
 
 public class CircleCollider extends Collider{
 

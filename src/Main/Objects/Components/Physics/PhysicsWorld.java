@@ -1,0 +1,17 @@
+package Main.Objects.Components.Physics;
+
+import Main.Msc.Vector2;
+
+public class PhysicsWorld {
+
+    public static Vector2 gravityAcceleration=new Vector2(0,0.00982f);
+
+
+    public static Vector2 getGravityAcceleration() {
+        return gravityAcceleration;
+    }
+
+    public static void setGravityAcceleration(Vector2 gravityAcceleration) {
+        PhysicsWorld.gravityAcceleration = gravityAcceleration;
+    }
+}
