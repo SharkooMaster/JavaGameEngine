@@ -6,9 +6,9 @@ import Main.Objects.Components.Physics.PhysicsBody;
 import Main.Objects.Object;
 
 public class Ground extends Object {
-    public Ground(Vector2 position, Vector2 scale) {
+    public Ground(Vector2 position, Vector2 scale,String tagname) {
         super(position);
-
+        setTag(tagname);
         ScareCollider c = new ScareCollider();
         c.setVisible(true);
         c.setParent(this);

@@ -74,7 +74,7 @@ public class ScareCollider extends Collider{
             hasCollided = false;
         }
     }
-    public static boolean isCollision(Collider ob1, LinkedList<Object> objects) {
+    public static boolean isCollision(Collider ob1,Collider parent, LinkedList<Object> objects) {
 
         class Player{
             float x;
@@ -91,7 +91,7 @@ public class ScareCollider extends Collider{
 
         for(Object ob :objects)
         {
-            if(ob!=ob1.getParent()) {
+            if(ob!=ob1.getParent()&&ob!=parent.getParent()) {
                 for (Collider ob2 : ob.getColliders()) {
 
                     Player player2 = new Player();
@@ -104,6 +104,7 @@ public class ScareCollider extends Collider{
                             player1.x + player1.width > player2.x &&
                             player1.y < player2.y + player2.height &&
                             player1.y + player1.height > player2.y) {
+                        System.out.println(ob1.getParent().getTag()+" collides with "+ob.getTag());
                         return true;
                     }
                 }

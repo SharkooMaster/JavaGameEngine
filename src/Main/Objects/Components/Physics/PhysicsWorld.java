@@ -4,7 +4,7 @@ import Main.Msc.Vector2;
 
 public class PhysicsWorld {
 
-    public static Vector2 gravityAcceleration=new Vector2(0,0.00982f);
+    public static Vector2 gravityAcceleration=new Vector2(0,0.0982f);
 
 
     public static Vector2 getGravityAcceleration() {

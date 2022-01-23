@@ -21,8 +21,8 @@ public class Main3  {
 
         ObjectHandler.addObject(new Item(true));
         //ObjectHandler.addObject(new Enemy(new Vector2(300,500)));
-        ObjectHandler.addObject(new Ground(new Vector2(300,600), new Vector2(1000,100)));
-        ObjectHandler.addObject(new Ground(new Vector2(300,500),new Vector2(100,100)));
+        ObjectHandler.addObject(new Ground(new Vector2(300,600), new Vector2(1000,100),"ground1"));
+        ObjectHandler.addObject(new Ground(new Vector2(300,500),new Vector2(100,100),"ground2"));
 
         Main.Start(frame);
     }

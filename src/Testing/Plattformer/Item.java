@@ -16,7 +16,7 @@ public class Item extends Object {
 
         super();
 
-        setPosition(new Vector2(200,200));
+        setPosition(new Vector2(100,500));
 
         setAnimation(new Animation());
         setScale(new Vector2(100,100));
@@ -44,6 +44,8 @@ public class Item extends Object {
         b.setUseGravity(goDown);
         setPhysicsbody(b);
 
+        setTag("Item");
+
     }
 
     @Override
@@ -54,7 +56,8 @@ public class Item extends Object {
 
     private void move()
     {
-            setPosition(getPosition().add(getDirection().multiply(speed)));
+        //setPosition(getPosition().add(getDirection().multiply(speed)));
+        getPhysicsbody().addForce(getDirection(),50);
     }
 
     @Override
@@ -70,9 +73,9 @@ public class Item extends Object {
     public void Update() {
         super.Update();
         speed = 2;
-        if(Input.isKeyDown(Keys.W)&&!hasJumped)
+        if(Input.isKeyDown(Keys.W))
         {
-            getPhysicsbody().addForce(new Vector2(0,-1),500);
+            getPhysicsbody().addForce(new Vector2(0,-1),50);
             hasJumped = true;
         }
         else if(Input.isKeyDown(Keys.D))
@@ -88,6 +91,7 @@ public class Item extends Object {
             setDirection(new Vector2(0,0));
         move();
 
+        this.UpdateComponents();
 
     }
 }

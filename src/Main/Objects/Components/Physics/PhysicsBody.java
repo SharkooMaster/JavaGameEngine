@@ -55,7 +55,7 @@ public class PhysicsBody extends Component {
     {
         Vector2 direction1 = direction.multiply(force/100);
         setVelocity(getVelocity().add(direction1));
-        getParent().setPosition(getParent().getPosition().add(direction1));
+        //getParent().setPosition(getParent().getPosition().add(direction1));
     }
 
     float updateTimer = 0;
@@ -68,12 +68,12 @@ public class PhysicsBody extends Component {
         {
             Vector2 force = PhysicsWorld.getGravityAcceleration().multiply(mass);
             //System.out.println(force);
-            setVelocity(getVelocity().add(force));
+            setVelocity(getVelocity().add(force.devide(mass).devide(5)));
         }
 
-        getParent().setPosition(getParent().getPosition().add(velocity));
+        getParent().setPosition(getParent().getPosition().add(getVelocity()));
 
-        System.out.println(velocity);
+        //System.out.println(velocity);
 
 
     }

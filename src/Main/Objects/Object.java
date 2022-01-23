@@ -3,6 +3,7 @@ package Main.Objects;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import Main.Display.Map;
 import Main.Msc.*;
@@ -152,19 +153,22 @@ public class Object {
         {
             if(true)
             {
-
+                boolean noV = false;
+                ArrayList<Vector2> vels = new ArrayList<>();
                 for(Collider c : getColliders()) {
 
+                    getPhysicsbody().setVelocity(new Vector2(getPhysicsbody().getVelocity().getX(),0));
+                    System.out.println(c.getParent().getPhysicsbody().getVelocity());
                     ScareCollider collider = (ScareCollider) c.copy();
-                    collider.setPosition(position.add(getPhysicsbody().getVelocity()));
+                    collider.setPosition(position);
+                    //getPosition().add(c.getParent().getPhysicsbody().getVelocity())
+
                     //System.out.println("is   "+c.getPosition());
                     //System.out.println("next "+collider.getPosition());
-
                             //System.out.println(ScareCollider.isCollision(collider,obj.getColliders()));
-                    if(ScareCollider.isCollision(collider,ObjectHandler.getObjects()))
+                    if(ScareCollider.isCollision(collider,c,ObjectHandler.getObjects()))
                     {
                         getPhysicsbody().setVelocity(new Vector2(0,0));
-
                     }
                     else
                     {
@@ -172,6 +176,11 @@ public class Object {
 
                         //this.position = position.add(position.getNegative());
                     }
+                }
+                if(noV)
+                {
+                    getPhysicsbody().setVelocity(new Vector2(0,0));
+
                 }
             }
         }
@@ -194,13 +203,15 @@ public class Object {
        // getInfoPanel().setLocation(new Point((int) (getPosition().getX()-100), (int) (getPosition().getY()-80)));
         //infoPanel.setData(this);
          //this.setHunger((this.getHunger()-0.01f));
+    }
+    public void UpdateComponents()
+    {
         for(Collider collider : colliders)
         {
             collider.Update();
         }
         if(physicsBody!=null)
             getPhysicsbody().Update();
-
     }
 
     public Sprite getSprite() {
