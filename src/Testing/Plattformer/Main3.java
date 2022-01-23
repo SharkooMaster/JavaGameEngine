@@ -1,5 +1,6 @@
 package Testing.Plattformer;
 
+import Main.Display.Map;
 import Main.Main;
 import Main.Msc.ObjectHandler;
 import Main.Msc.Vector2;
@@ -10,6 +11,8 @@ import java.awt.*;
 
 public class Main3  {
 
+    public static JLabel vel = new JLabel("0");
+
     public static void main(String[] args)
     {
         JFrame frame = new JFrame();
@@ -18,6 +21,7 @@ public class Main3  {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Main.isPlaying=true;
         Main.background= new Color(44, 157, 228);
+        Map.addJComponent(vel);
 
         ObjectHandler.addObject(new Item(true));
         //ObjectHandler.addObject(new Enemy(new Vector2(300,500)));

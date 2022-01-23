@@ -4,7 +4,9 @@ import Main.Msc.Vector2;
 import Main.Objects.Components.Component;
 import Main.Objects.Object;
 
-public class Collider extends Component {
+import java.awt.*;
+
+public class Collider extends Component  {
 
 
     private boolean isTrgger = false;

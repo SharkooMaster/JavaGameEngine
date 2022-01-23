@@ -10,6 +10,7 @@ import Main.Msc.*;
 import Main.Objects.Components.Collision.Collider;
 import Main.Objects.Components.Collision.ScareCollider;
 import Main.Objects.Components.Physics.PhysicsBody;
+import Testing.Plattformer.Main3;
 
 public class Object {
 
@@ -153,36 +154,29 @@ public class Object {
         {
             if(true)
             {
-                boolean noV = false;
-                ArrayList<Vector2> vels = new ArrayList<>();
                 for(Collider c : getColliders()) {
 
-                    getPhysicsbody().setVelocity(new Vector2(getPhysicsbody().getVelocity().getX(),0));
-                    System.out.println(c.getParent().getPhysicsbody().getVelocity());
-                    ScareCollider collider = (ScareCollider) c.copy();
-                    collider.setPosition(position);
-                    //getPosition().add(c.getParent().getPhysicsbody().getVelocity())
+                    PhysicsBody b = c.getParent().getPhysicsbody();
 
-                    //System.out.println("is   "+c.getPosition());
-                    //System.out.println("next "+collider.getPosition());
-                            //System.out.println(ScareCollider.isCollision(collider,obj.getColliders()));
-                    if(ScareCollider.isCollision(collider,c,ObjectHandler.getObjects()))
+                    ScareCollider xcolider = (ScareCollider) c.copy();
+                    xcolider.setPosition(getPosition().add(b.getVelocity().removeX()));
+                    if(ScareCollider.isCollision(xcolider,c,ObjectHandler.getObjects()))
                     {
-                        getPhysicsbody().setVelocity(new Vector2(0,0));
+                        b.setVelocity(b.getVelocity().removeY());
                     }
-                    else
+                    ScareCollider ycolider = (ScareCollider) c.copy();
+                    ycolider.setPosition(getPosition().add(b.getVelocity().removeY()));
+                    if(ScareCollider.isCollision(ycolider,c,ObjectHandler.getObjects()))
                     {
-                        this.position = position;
-
-                        //this.position = position.add(position.getNegative());
+                        b.setVelocity(b.getVelocity().removeX());
                     }
-                }
-                if(noV)
-                {
-                    getPhysicsbody().setVelocity(new Vector2(0,0));
+                   this.position = getPosition().add(c.getParent().getPhysicsbody().getVelocity());
 
                 }
+
             }
+            else
+            this.position=position;
         }
     }
 
@@ -220,7 +214,9 @@ public class Object {
 
     public void onCollision(Object collision)
     {
-        setPosition(getPosition());
+        //setPosition(getPosition());
+        //PhysicsBody b = getPhysicsbody();
+
     }
 
     public void onCollisionExit(Object collision)

@@ -19,7 +19,6 @@ public class Sprite {
     private int TILE_SIZE = 255;
     private Vector2 scale = new Vector2(150,150);
 
-
     public Vector2 getScale() {
         return scale;
     }

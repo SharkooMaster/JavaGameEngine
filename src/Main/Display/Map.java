@@ -145,6 +145,7 @@ public class Map extends JPanel {
         //System.out.println((end-start)/100000);
     }
 
+    Polygon p= new Polygon(new int[]{205,125,225,260},new int[]{160,272,366,274},4);
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -180,7 +181,7 @@ public class Map extends JPanel {
 
             for(Collider c : ob.getColliders())
             {
-                /*
+
                 Point ob11 = new Point();
                 ob11.x = c.getPosition().getX()+c.getScale().devide(2).getX();
                 ob11.y = c.getPosition().getY()-c.getScale().devide(2).getY();
@@ -202,7 +203,12 @@ public class Map extends JPanel {
                 g.drawOval((int) ob12.x, (int) ob12.y,5,5);
                 g.drawOval((int) ob13.x, (int) ob13.y,5,5);
                 g.drawOval((int) ob14.x, (int) ob14.y,5,5);
-*/                g.setColor(Color.GREEN);
+                Polygon p= new Polygon(new int[]{205,125,225,260},new int[]{160,272,366,274},4);
+                p.translate(x,10);
+
+                x++;
+                g.drawPolygon(p);
+                   g.setColor(Color.GREEN);
 
                 if(c instanceof CircleCollider&&c.isVisible())
                 {
@@ -210,7 +216,7 @@ public class Map extends JPanel {
                 }
                 else if(c instanceof ScareCollider &&c.isVisible())
                 {
-                    g.drawRect((int) (c.getPosition().getX()-(c.getScale().getX()/2)), (int) (c.getPosition().getY()-(c.getScale().getY()/2)), (int) c.getScale().getX(), (int) c.getScale().getY());
+                    g.drawPolygon(c.p);
                 }
                 g.setColor(Color.black);
             }

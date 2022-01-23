@@ -4,6 +4,11 @@ import java.util.Objects;
 
 public class Vector2 {
 
+    public static Vector2 up = new Vector2(0,-1);
+    public static Vector2 down = new Vector2(0,1);
+    public static Vector2 right = new Vector2(1,0);
+    public static Vector2 left = new Vector2(-1,0);
+    public static Vector2 zero = new Vector2(0,0);
     private float x,y;
 
     public Vector2(float x, float y) {
@@ -95,5 +100,12 @@ public class Vector2 {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    public Vector2 removeY(){
+        return new Vector2(x,0);
+    }
+    public Vector2 removeX(){
+        return new Vector2(0,y);
     }
 }

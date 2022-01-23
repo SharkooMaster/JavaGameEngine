@@ -16,7 +16,7 @@ public class Item extends Object {
 
         super();
 
-        setPosition(new Vector2(100,500));
+        setPosition(new Vector2(100,400));
 
         setAnimation(new Animation());
         setScale(new Vector2(100,100));
@@ -31,6 +31,7 @@ public class Item extends Object {
                 ,new Vector2(6,1),new Vector2(0,2),new Vector2(1,2),new Vector2(2,2),new Vector2(4,2),new Vector2(5,2),new Vector2(6,2),});
 
         ScareCollider c = new ScareCollider();
+        c.setPosition(getPosition());
         c.setScale(new Vector2(100,100));
         c.setParent(this);
         c.setOffset(new Vector2(0,-10));
@@ -51,7 +52,7 @@ public class Item extends Object {
     @Override
     public void onCollisionExit(Object parent) {
         super.onCollisionExit(parent);
-        System.out.println("i have collided ");
+        //System.out.println("i have collided ");
     }
 
     private void move()
@@ -63,7 +64,7 @@ public class Item extends Object {
     @Override
     public void onCollision(Object collision) {
         super.onCollision(collision);
-        System.out.println("colliding");
+        //System.out.println("colliding");
         hasJumped = false;
     }
 

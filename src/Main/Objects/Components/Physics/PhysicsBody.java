@@ -2,6 +2,7 @@ package Main.Objects.Components.Physics;
 
 import Main.Msc.Vector2;
 import Main.Objects.Components.Component;
+import Testing.Plattformer.Main3;
 
 public class PhysicsBody extends Component {
 
@@ -9,7 +10,7 @@ public class PhysicsBody extends Component {
     private float mass=10;//kg
     private Vector2 velocity = new Vector2(0,0);
     private Vector2 force = new Vector2(0,0);
-    private float frictionAmount = 1;
+    private float frictionAmount = 1f;
 
     public boolean isUseGravity() {
         return useGravity;
@@ -63,15 +64,15 @@ public class PhysicsBody extends Component {
     @Override
     public void Update()
     {
-
+        Main3.vel.setText(getVelocity().toString());
         if(useGravity)
         {
             Vector2 force = PhysicsWorld.getGravityAcceleration().multiply(mass);
             //System.out.println(force);
-            setVelocity(getVelocity().add(force.devide(mass).devide(5)));
+            setVelocity(getVelocity().add(force.devide(mass)));
         }
 
-        getParent().setPosition(getParent().getPosition().add(getVelocity()));
+        getParent().setPosition(getParent().getPosition().add(getVelocity().multiply(getFrictionAmount())));
 
         //System.out.println(velocity);
 
