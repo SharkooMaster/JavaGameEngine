@@ -181,7 +181,7 @@ public class Map extends JPanel {
 
             for(Collider c : ob.getColliders())
             {
-
+                /*
                 Point ob11 = new Point();
                 ob11.x = c.getPosition().getX()+c.getScale().devide(2).getX();
                 ob11.y = c.getPosition().getY()-c.getScale().devide(2).getY();
@@ -205,8 +205,8 @@ public class Map extends JPanel {
                 g.drawOval((int) ob14.x, (int) ob14.y,5,5);
                 Polygon p= new Polygon(new int[]{205,125,225,260},new int[]{160,272,366,274},4);
                 p.translate(x,10);
-
                 x++;
+*/
                 g.drawPolygon(p);
                    g.setColor(Color.GREEN);
 

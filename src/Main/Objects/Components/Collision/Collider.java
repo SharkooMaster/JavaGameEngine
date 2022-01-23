@@ -2,25 +2,22 @@ package Main.Objects.Components.Collision;
 
 import Main.Msc.Vector2;
 import Main.Objects.Components.Component;
-import Main.Objects.Object;
-
-import java.awt.*;
 
 public class Collider extends Component  {
 
 
-    private boolean isTrgger = false;
+    private boolean isTrigger = false;
 
 
     public Collider() {
     }
 
-    public boolean isTrgger() {
-        return isTrgger;
+    public boolean isTrigger() {
+        return isTrigger;
     }
 
-    public void setTrgger(boolean trgger) {
-        isTrgger = trgger;
+    public void setTrigger(boolean trigger) {
+        isTrigger = trigger;
     }
 
     public Collider(Vector2 position, Vector2 scale) {
@@ -28,6 +25,8 @@ public class Collider extends Component  {
         setScale(scale);
     }
 
+    public void collisionHandler(Collider ob2)
+    {}
 
     public boolean isColliding(Collider otherCollider)
     {

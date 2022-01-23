@@ -3,7 +3,6 @@ package Main.Objects;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 import Main.Display.Map;
 import Main.Msc.*;
@@ -17,7 +16,7 @@ public class Object {
     private Sprite sprite;
     private Vector2 position=new Vector2(200,200);
     private Vector2 scale=new Vector2(100,100);
-    private Vector2 direction = new Vector2(1,0);
+    private Vector2 direction = new Vector2(0,0);
 
     private boolean isColliding = false;
 
@@ -146,38 +145,55 @@ public class Object {
         return position;
     }
 
-    public void setPosition(Vector2 position) {
+    public void setPosition(Vector2 position)
+    {
+        this.position = position;
+    }
+
+    public Vector2 movePosition(Vector2 position) {
+         /*
+        note that there is two similar function (setPosition) and (movePosition)
+        the difference is that setPosition sets the position whiles move-position
+        disposition with the velocity from the physicsbody
+        */
+        Vector2 dir = position.subtract(getPosition());
+
         if(physicsBody==null) {
             this.position = position;
         }
-        else
-        {
-            if(true)
-            {
-                for(Collider c : getColliders()) {
+        else {
+            for(Collider c : getColliders()) {
+                if(!c.isTrigger()) {
 
-                    PhysicsBody b = c.getParent().getPhysicsbody();
+                    Main3.dir.setText("My pos "+getPosition().toString()+" newpos "+position.toString()+" dir "+position.subtract(getPosition()));
+                    Collider c2=null;
+
 
                     ScareCollider xcolider = (ScareCollider) c.copy();
-                    xcolider.setPosition(getPosition().add(b.getVelocity().removeX()));
-                    if(ScareCollider.isCollision(xcolider,c,ObjectHandler.getObjects()))
-                    {
-                        b.setVelocity(b.getVelocity().removeY());
+                    xcolider.setPosition(getPosition().add(dir.removeX()));
+                    if((ScareCollider.isCollision(xcolider,c,ObjectHandler.getObjects()))!=null) {
+                        c2=ScareCollider.isCollision(xcolider,c,ObjectHandler.getObjects());
+                        dir=(dir.removeY());
+                        //b.setVelocity(b.getVelocity().removeY());
+
                     }
+
                     ScareCollider ycolider = (ScareCollider) c.copy();
-                    ycolider.setPosition(getPosition().add(b.getVelocity().removeY()));
-                    if(ScareCollider.isCollision(ycolider,c,ObjectHandler.getObjects()))
-                    {
-                        b.setVelocity(b.getVelocity().removeX());
+                    ycolider.setPosition(getPosition().add(dir.removeY()));
+
+                    if((ScareCollider.isCollision(ycolider,c,ObjectHandler.getObjects()))!=null) {
+                        c2=ScareCollider.isCollision(ycolider,c,ObjectHandler.getObjects());
+                        //getPhysicsbody().setVelocity(getDirection());
+                        dir=(dir.removeX());
                     }
-                   this.position = getPosition().add(c.getParent().getPhysicsbody().getVelocity());
+                    c.collisionHandler(c2);
 
+                    setPosition(getPosition().add(dir));
                 }
-
+                else setPosition(position);
             }
-            else
-            this.position=position;
         }
+        return dir;
     }
 
     /**
@@ -221,6 +237,7 @@ public class Object {
 
     public void onCollisionExit(Object collision)
     {
+
         setColliding(false);
     }
 

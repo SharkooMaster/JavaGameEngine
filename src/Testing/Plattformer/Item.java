@@ -10,7 +10,7 @@ import Main.Objects.Object;
 
 public class Item extends Object {
 
-    private float speed = 2;
+    private float speed = 4;
 
     public Item(boolean goDown) {
 
@@ -36,6 +36,7 @@ public class Item extends Object {
         c.setParent(this);
         c.setOffset(new Vector2(0,-10));
         c.setVisible(true);
+        c.setTrigger(false);
         addCollider(c);
 
         PhysicsBody b = new PhysicsBody();
@@ -57,27 +58,27 @@ public class Item extends Object {
 
     private void move()
     {
-        //setPosition(getPosition().add(getDirection().multiply(speed)));
-        getPhysicsbody().addForce(getDirection(),50);
+        movePosition(getPosition().add((getDirection().multiply(speed))));
+        //getPhysicsbody().addForce(getDirection(),5);
+        getAnimation().setAnimationIndex(1);
     }
 
     @Override
     public void onCollision(Object collision) {
         super.onCollision(collision);
-        //System.out.println("colliding");
-        hasJumped = false;
+        setColliding(true);
     }
 
-    private boolean hasJumped = false;
 
     @Override
     public void Update() {
         super.Update();
+        this.UpdateComponents();
+        Main3.dir.setText(getDirection().toString());
         speed = 2;
         if(Input.isKeyDown(Keys.W))
         {
             getPhysicsbody().addForce(new Vector2(0,-1),50);
-            hasJumped = true;
         }
         else if(Input.isKeyDown(Keys.D))
         {
@@ -91,8 +92,9 @@ public class Item extends Object {
         else
             setDirection(new Vector2(0,0));
         move();
+        System.out.println(getAnimation().getAnimationIndex());
+        getAnimation().setAnimationIndex(0);
 
-        this.UpdateComponents();
 
     }
 }

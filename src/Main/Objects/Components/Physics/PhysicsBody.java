@@ -10,7 +10,7 @@ public class PhysicsBody extends Component {
     private float mass=10;//kg
     private Vector2 velocity = new Vector2(0,0);
     private Vector2 force = new Vector2(0,0);
-    private float frictionAmount = 1f;
+    private float frictionAmount = 0.1f;
 
     public boolean isUseGravity() {
         return useGravity;
@@ -56,6 +56,7 @@ public class PhysicsBody extends Component {
     {
         Vector2 direction1 = direction.multiply(force/100);
         setVelocity(getVelocity().add(direction1));
+
         //getParent().setPosition(getParent().getPosition().add(direction1));
     }
 
@@ -71,9 +72,12 @@ public class PhysicsBody extends Component {
             //System.out.println(force);
             setVelocity(getVelocity().add(force.devide(mass)));
         }
+        //System.out.println(getParent().isColliding());
+        //if(velocity.getX()>0)
+        //setVelocity(new Vector2(getVelocity().getX()*(0.5f),getVelocity().getY()));
 
-        getParent().setPosition(getParent().getPosition().add(getVelocity().multiply(getFrictionAmount())));
-
+        setVelocity(getParent().movePosition(getParent().getPosition().add(getVelocity())));
+        //getParent().setDirection(getVelocity());
         //System.out.println(velocity);
 
 

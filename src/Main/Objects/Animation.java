@@ -38,11 +38,13 @@ public class Animation {
         //Adds until timer then 0
         spriteCounter = (spriteCounter+1>=timer) ? 0 :spriteCounter+1;
         //Sets the current sprite index
-        currentSprite = (currentSprite+1>=spritesLen&&spriteCounter>=timer-1) ?0:(spriteCounter>=timer-1)? (currentSprite+1): currentSprite;
+        currentSprite = (((currentSprite + 1) >= spritesLen) && (spriteCounter >= (timer - 1))) ? 0 :
+                ((spriteCounter >= (timer - 1)) ? (currentSprite + 1) :
+                        currentSprite);
         //Sprite.resize(getSprite().getSpriteImage(),new Vector2(100,100));
         //sprite.setSpriteImage(sprite.getSprites()[currentSprite]);
-        try{
-        sprite.setSpriteImage(animations.get(animationIndex)[currentSprite]);}catch (Exception e){}
+
+        sprite.setSpriteImage(animations.get(animationIndex)[currentSprite]);
         return (Sprite.resize(sprite.rotate(angle),scale));
     }
 

@@ -1,10 +1,8 @@
 package Main.Objects.Components.Collision;
 
 import Main.Msc.Vector2;
-import Main.Objects.Components.Component;
 import Main.Objects.Object;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class ScareCollider extends Collider{
@@ -49,7 +47,7 @@ public class ScareCollider extends Collider{
                 player1.y < player2.y + player2.height &&
                 player1.y + player1.height > player2.y)
         {
-            if(!isTrgger())
+            if(!isTrigger())
             {
                 getParent().onCollision(ob2.getParent());
                 if(!hasCollided)
@@ -100,7 +98,7 @@ public class ScareCollider extends Collider{
                 player1.y < player2.y + player2.height &&
                 player1.y + player1.height > player2.y)
         {
-            if(!isTrgger()) {
+            if(!isTrigger()) {
                 getParent().onCollision(ob2.getParent());
                 if(!hasCollided) {
                     getParent().onCollisionEnter(ob2.getParent());
@@ -117,7 +115,28 @@ public class ScareCollider extends Collider{
         }
     }
 
-    public static boolean isCollision(Collider ob1,Collider parent, LinkedList<Object> objects) {
+    @Override
+    public void collisionHandler(Collider ob2)
+    {
+        if(!hasCollided&&ob2!=null) {
+            if(!isTrigger()) {
+                getParent().onCollision(ob2.getParent());
+                if(!hasCollided) {
+                    getParent().onCollisionEnter(ob2.getParent());
+                }
+            }
+            else {
+                getParent().onTrigger(ob2.getParent());
+            }
+            hasCollided=true;
+        }
+        else if(hasCollided&&ob2!=null) {
+            getParent().onCollisionExit(ob2.getParent());
+            hasCollided = false;
+        }
+    }
+
+    public static Collider isCollision(Collider ob1, Collider parent, LinkedList<Object> objects) {
 
         class Player{
             float x;
@@ -147,13 +166,13 @@ public class ScareCollider extends Collider{
                             player1.x + player1.width > player2.x &&
                             player1.y < player2.y + player2.height &&
                             player1.y + player1.height > player2.y) {
-                        System.out.println(ob1.getParent().getTag()+" collides with "+ob.getTag());
-                        return true;
+                        //System.out.println(ob1.getParent().getTag()+" collides with "+ob.getTag());
+                        return ob2;
                     }
                 }
             }
         }
-        return false;
+        return null;
     }
 
     public ScareCollider copy()

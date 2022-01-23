@@ -12,6 +12,7 @@ import java.awt.*;
 public class Main3  {
 
     public static JLabel vel = new JLabel("0");
+    public static JLabel dir = new JLabel("0");
 
     public static void main(String[] args)
     {
@@ -22,6 +23,7 @@ public class Main3  {
         Main.isPlaying=true;
         Main.background= new Color(44, 157, 228);
         Map.addJComponent(vel);
+        Map.addJComponent(dir);
 
         ObjectHandler.addObject(new Item(true));
         //ObjectHandler.addObject(new Enemy(new Vector2(300,500)));
