@@ -1,6 +1,4 @@
-package Main.Msc;
-
-import Main.Objects.Animation;
+package JGame.Msc;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

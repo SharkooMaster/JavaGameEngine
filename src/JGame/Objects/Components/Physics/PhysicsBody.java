@@ -1,8 +1,7 @@
-package Main.Objects.Components.Physics;
+package JGame.Objects.Components.Physics;
 
-import Main.Msc.Vector2;
-import Main.Objects.Components.Component;
-import Testing.Plattformer.Main3;
+import JGame.Msc.Vector2;
+import JGame.Objects.Components.Component;
 
 public class PhysicsBody extends Component {
 
@@ -65,22 +64,13 @@ public class PhysicsBody extends Component {
     @Override
     public void Update()
     {
-        Main3.vel.setText(getVelocity().toString());
         if(useGravity)
         {
-            Vector2 force = PhysicsWorld.getGravityAcceleration().multiply(mass);
-            //System.out.println(force);
-            setVelocity(getVelocity().add(force.devide(mass)));
+            Vector2 g = PhysicsWorld.getGravityAcceleration();
+
+            setVelocity(getVelocity().add(g));
         }
-        //System.out.println(getParent().isColliding());
-        //if(velocity.getX()>0)
-        //setVelocity(new Vector2(getVelocity().getX()*(0.5f),getVelocity().getY()));
-
         setVelocity(getParent().movePosition(getParent().getPosition().add(getVelocity())));
-        //getParent().setDirection(getVelocity());
-        //System.out.println(velocity);
-
-
     }
 
 

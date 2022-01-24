@@ -1,4 +1,4 @@
-package Main.Msc;
+package JGame.Msc;
 
 import java.util.Objects;
 
@@ -42,6 +42,9 @@ public class Vector2 {
     public Vector2 multiply(Vector2 vector2) {
         return new Vector2(x*vector2.x,y*vector2.y);
     }
+    public float getMagnitude (){
+        return (float) Math.sqrt((double) this.x * (double) this.x + (double) this.y * (double) this.y);
+    }
 
     public Vector2 getNegative(){
         return new Vector2(y,x);
@@ -66,7 +69,7 @@ public class Vector2 {
     public Vector2 getDirection(double angle) {
         float x = (float) Math.cos(Math.toRadians(angle));
         float y = (float) Math.sin(Math.toRadians(angle));
-        return new Vector2(-x,-y);
+        return new Vector2(x,y);
     }
 
     public Vector2 getNormalized()

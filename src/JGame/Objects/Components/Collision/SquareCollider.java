@@ -1,18 +1,18 @@
-package Main.Objects.Components.Collision;
+package JGame.Objects.Components.Collision;
 
-import Main.Msc.Vector2;
-import Main.Objects.Object;
+import JGame.Msc.Vector2;
+import JGame.Objects.GameObject;
 
 import java.util.LinkedList;
 
-public class ScareCollider extends Collider{
+public class SquareCollider extends Collider{
 
     private boolean hasCollided = false;
 
-    public ScareCollider() {
+    public SquareCollider() {
     }
 
-    public ScareCollider(Vector2 position, Vector2 scale) {
+    public SquareCollider(Vector2 position, Vector2 scale) {
         super(position, scale);
     }
 
@@ -136,7 +136,7 @@ public class ScareCollider extends Collider{
         }
     }
 
-    public static Collider isCollision(Collider ob1, Collider parent, LinkedList<Object> objects) {
+    public static Collider isCollision(Collider ob1, Collider parent, LinkedList<GameObject> objects) {
 
         class Player{
             float x;
@@ -151,10 +151,10 @@ public class ScareCollider extends Collider{
         player1.height = ob1.getScale().getY();
         player1.width = ob1.getScale().getX();
 
-        for(Object ob :objects)
+        for(GameObject ob :objects)
         {
             if(ob!=ob1.getParent()&&ob!=parent.getParent()) {
-                for (Collider ob2 : ob.getColliders()) {
+                for (Collider ob2 : ob.getComponents(new SquareCollider())) {
 
                     Player player2 = new Player();
                     player2.x = ob2.getPosition().getX() - ob2.getScale().getX() / 2;
@@ -175,9 +175,9 @@ public class ScareCollider extends Collider{
         return null;
     }
 
-    public ScareCollider copy()
+    public SquareCollider copy()
     {
-        ScareCollider c = new ScareCollider();
+        SquareCollider c = new SquareCollider();
         c.setOffset(getOffset());
         c.setParent(getParent());
         c.setVisible(isVisible());

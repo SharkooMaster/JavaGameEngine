@@ -1,6 +1,6 @@
-package Main.Objects.Components.Collision;
+package JGame.Objects.Components.Collision;
 
-import Main.Msc.Vector2;
+import JGame.Msc.Vector2;
 
 public class CircleCollider extends Collider{
 

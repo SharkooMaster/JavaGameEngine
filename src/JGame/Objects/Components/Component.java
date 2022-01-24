@@ -1,9 +1,7 @@
-package Main.Objects.Components;
+package JGame.Objects.Components;
 
-import Main.Msc.Vector2;
-import Main.Objects.Object;
-
-import java.awt.*;
+import JGame.Msc.Vector2;
+import JGame.Objects.GameObject;
 
 public class Component {
 
@@ -11,18 +9,25 @@ public class Component {
     private Vector2 offset=new Vector2(0,0);
     private Vector2 scale;
     private boolean visible = false;
-    private Object parent;
-    public Polygon p = new Polygon();
+    private GameObject parent;
+    private boolean enabled= true;
 
-    public Component() {
-        p = new Polygon(new int[]{0,0,0,0},new int[]{0,0,0,0},4);
+    public Component(){
     }
 
-    public Object getParent() {
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public GameObject getParent() {
         return parent;
     }
 
-    public void setParent(Object parent) {
+    public void setParent(GameObject parent) {
         this.parent = parent;
     }
 
@@ -31,15 +36,8 @@ public class Component {
     }
 
     public void setPosition(Vector2 position) {
-        for(int i = 0;i<p.ypoints.length;i++)
-        {
-            p.ypoints[i] += position.getY();
-        }
-        for(int i = 0;i<p.xpoints.length;i++)
-        {
-            p.xpoints[i] += position.getX();
-        }
-        this.position = position;
+
+        this.position = position.add(offset);
     }
 
     public Vector2 getOffset() {
@@ -56,8 +54,6 @@ public class Component {
 
     public void setScale(Vector2 scale) {
         //System.out.println((getPosition().getX()-scale.getX()));
-        p = new Polygon(new int[]{(int) (getPosition().getX()-scale.getX()/2), (int) (getPosition().getX()+scale.getX()/2), (int) (getPosition().getX()+scale.getX()/2), (int) (getPosition().getX()-scale.getX()/2)}
-                ,new int[]{(int) (getPosition().getY()- scale.getY()/2), (int) (getPosition().getY()- scale.getY()/2), (int) (getPosition().getY()+ scale.getY()/2), (int) (getPosition().getY()+ scale.getY()/2)},4);
 
         this.scale = scale;
     }
@@ -73,6 +69,17 @@ public class Component {
     public void Update()
     {
         //p.translate((int) (-this.position.getX()), (int) (this.position.getY()));
+    }
+
+    @Override
+    public String toString() {
+        return "Component " + getClass().getName()+"{"+
+                "position=" + position +
+                ", offset=" + offset +
+                ", scale=" + scale +
+                ", visible=" + visible +
+                ", parent=" + parent +
+                '}';
     }
 
     public Component copy()

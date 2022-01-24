@@ -1,7 +1,7 @@
-package Main.Objects.Components.Collision;
+package JGame.Objects.Components.Collision;
 
-import Main.Msc.Vector2;
-import Main.Objects.Components.Component;
+import JGame.Msc.Vector2;
+import JGame.Objects.Components.Component;
 
 public class Collider extends Component  {
 

@@ -1,6 +1,6 @@
-package Main.Objects.Components.Physics;
+package JGame.Objects.Components.Physics;
 
-import Main.Msc.Vector2;
+import JGame.Msc.Vector2;
 
 public class PhysicsWorld {
 
